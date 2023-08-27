@@ -1,3 +1,5 @@
+import configparser
+
 # para instalar todos os modulos
 # pip install -r requirements.txt
 import openai  # pip install openai
@@ -6,8 +8,11 @@ import whisper  # pip install whisper-openai
 import pyttsx3  # pip install pyttsx3
 import os
 
+config = configparser.ConfigParser()
+config.read('config.ini')
+
 # Initialize the API key
-openai.api_key = "sua_key_string"
+openai.api_key = config['openai']['api_key']
 
 # caso nao queira falar "assistente" ou "Chat GPT"
 sem_palavra_ativadora = False
@@ -16,8 +21,8 @@ debug_custo = False
 # print de algumas informacoes para debug
 debugar = False
 # define qual gerador de texto
-# escolher_stt = "whisper"
-escolher_stt = "google"
+escolher_stt = "whisper"
+# escolher_stt = "google"
 # escolhe entrada por texto ou voz
 entrada_por_texto = False
 # falar ou nao
@@ -129,4 +134,6 @@ while True:
 
     if debugar:
         print("Mensages", mensagens, type(mensagens))
+
+
 print("See ya!")
